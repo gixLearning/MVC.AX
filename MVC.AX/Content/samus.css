@@ -1,0 +1,62 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed');
+
+h2.skills {
+    font-family: 'Saira Extra Condensed',serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 3.6rem;
+    color: #000;
+}
+
+.subHeading-small {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'Saira Extra Condensed',serif;
+    font-size: 1.9rem;
+}
+
+.title-bold {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'Saira Extra Condensed',serif;
+    font-size: 2.8rem;
+    color: #000;
+    margin: 0;
+}
+
+ul.skill-icons {
+    font-size: 3rem;
+    list-style: none;
+    padding-left: 0;
+}
+
+    ul.skill-icons > li {
+        display: inline-block;
+        color: #707C80;
+    }
+
+        ul.skill-icons > li > i:hover {
+            color: #000;
+        }
+
+.descript-text {
+    font-family: 'Open Sans',serif;
+    color: #95a5a6;
+}
+
+.devicons.devicons-visualstudio:hover {
+    color: rebeccapurple;
+}
+.no-left-padding {
+    padding-left: 0;
+}
+img.menu-image-small {
+    float: left;
+    margin: 2px 5px;
+    height: 46px;
+    width: 46px;
+}
+
+button.btnMinWidth {
+    min-width: 75px;
+}

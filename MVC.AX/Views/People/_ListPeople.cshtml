@@ -1,0 +1,41 @@
+﻿@model MVC.AX.Models.Person
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <span>@Html.DisplayFor(p => p.Name)</span>
+                    <form action="@Url.Action("Index")" method="post"></form>
+                </div>
+                <div class="col-md-2">
+                    @*<a href="#"><button class="btn btn-primary btn-xs pull-right btnMinWidth">Edit</button></a>*@
+                    @Ajax.ActionLink("Edit", "Edit", new { id = Model.Name },
+                       new AjaxOptions {
+                           UpdateTargetId = "info-panel",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET"
+                       },
+                       new { data_ax_infopanel = "true"})
+
+                       @Html.ActionLink("Edit", "Edit", "People",
+                            //null /*routeValues*/,
+                            new RouteValueDictionary(new { id = Model.Name }),
+                            new Dictionary<string, object> {
+                                { "data-ax-infopanel", "true" },
+                                { "data-ax-target", "info-panel" }
+                        })
+                </div>
+            </div>
+        </div>
+        <div id="info-panel" data-ax-infopanel="true" class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <span><strong>Phonenumber: </strong>@Html.DisplayFor(p => p.Phonenumber)</span>
+                </div>
+                <div class="col-md-6">
+                    <span><strong>City: </strong>@Html.DisplayFor(p => p.City)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
