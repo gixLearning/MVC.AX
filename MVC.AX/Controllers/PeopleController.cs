@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 
 namespace MVC.AX.Controllers
 {
@@ -13,8 +14,7 @@ namespace MVC.AX.Controllers
         //{
         //    return View();
         //}
-        private int requ = 0;
-
+        
         public ActionResult Index(string searchtext = null) {
             var peps = people
                         .OrderBy(p => p.Name)
@@ -59,28 +59,67 @@ namespace MVC.AX.Controllers
             }
         }
 
-        // GET: People/Edit/5
-        public ActionResult Edit(string id) {
+        public ActionResult EditPeople(string id) {
             if (Request.IsAjaxRequest()) {
-                Session["times"] = Convert.ToInt32(Session["times"]) + 1;
-                return Content("AJAX" + Session["times"]);
-                return Content(id);
+                //Session["times"] = Convert.ToInt32(Session["times"]) + 1;
+                //return Content("AJAX" + Session["times"]);
+
+                Person match = people.Find(p => p.Name == id);
+                return PartialView("_EditPerson", match);
             }
+            else {
+                return RedirectToAction("Index");
+            }
+        }
+
+        // GET: People/Edit/5
+        public ActionResult Edit(int id) {            
 
             return View();
         }
 
-        // POST: People/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection) {
-            try
-            {
-                // TODO: Add update logic here
+        
 
-                return RedirectToAction("Index");
+        // POST: People/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(string id, FormCollection collection) {            
+
+        //    try
+        //    {
+        //         TODO: Add update logic here
+        //        if (ModelState.IsValid) {
+        //            Console.WriteLine("HEJ");
+        //        }
+
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "Name, City, Phonenumber")]Person person) {
+            try {
+
+                if (ModelState.IsValid) {
+
+                    Person match = people.Find(p => p.Name == person.Name);
+
+                    if (people.Contains(match)) {
+                        match.Phonenumber = person.Phonenumber;
+                        match.City = person.City;
+
+                        return PartialView("_ListPeople", match);
+                    }
+                }
+
+                return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest, "Missing data");
             }
-            catch
-            {
+            catch (Exception ex) {
+
                 return View();
             }
         }
@@ -91,7 +130,14 @@ namespace MVC.AX.Controllers
             if(match != null && people.Contains(match)) {
                 people.Remove(match);
             }
-            return RedirectToAction("Index");
+
+            var peps = people
+                        .OrderBy(p => p.Name)
+                        .Select(p => p);
+
+            var model = new PersonViewModel { People = peps };
+
+            return View(model);
         }
 
         // POST: People/Delete/5

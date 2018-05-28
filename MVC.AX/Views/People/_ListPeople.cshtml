@@ -1,5 +1,5 @@
 ﻿@model MVC.AX.Models.Person
-<div class="row">
+<div id="row-panel-id-@Html.DisplayFor(p => p.Phonenumber)" class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
@@ -9,25 +9,25 @@
                 </div>
                 <div class="col-md-2">
                     @*<a href="#"><button class="btn btn-primary btn-xs pull-right btnMinWidth">Edit</button></a>*@
-                    @Ajax.ActionLink("Edit", "Edit", new { id = Model.Name },
+                    @Ajax.ActionLink("Edit", "EditPeople", new { id = Model.Name },
                        new AjaxOptions {
-                           UpdateTargetId = "info-panel",
+                           UpdateTargetId = "info-panel-" + Model.Phonenumber,
                            InsertionMode = InsertionMode.Replace,
                            HttpMethod = "GET"
-                       },
-                       new { data_ax_infopanel = "true"})
+                       })
+                    <span> | </span>
+                    @Ajax.ActionLink("Delete", "Delete", new { id = Model.Name },
+                       new AjaxOptions {
+                           UpdateTargetId = "people-list",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET"
+                       })
 
-                       @Html.ActionLink("Edit", "Edit", "People",
-                            //null /*routeValues*/,
-                            new RouteValueDictionary(new { id = Model.Name }),
-                            new Dictionary<string, object> {
-                                { "data-ax-infopanel", "true" },
-                                { "data-ax-target", "info-panel" }
-                        })
                 </div>
             </div>
         </div>
-        <div id="info-panel" data-ax-infopanel="true" class="panel-body">
+        
+        <div id="info-panel-@Html.DisplayFor(p => p.Phonenumber)" class="panel-body">
             <div class="row">
                 <div class="col-md-6">
                     <span><strong>Phonenumber: </strong>@Html.DisplayFor(p => p.Phonenumber)</span>

@@ -109,7 +109,6 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +143,7 @@
     <Content Include="Views\People\Index.cshtml" />
     <Content Include="Views\People\_ListPeople.cshtml" />
     <Content Include="Views\People\_EditPerson.cshtml" />
+    <Content Include="Views\People\_EditPeople.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
