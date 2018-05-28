@@ -136,8 +136,7 @@ namespace MVC.AX.Controllers
                         .Select(p => p);
 
             var model = new PersonViewModel { People = peps };
-
-            return View(model);
+            return PartialView("Index", model);
         }
 
         // POST: People/Delete/5

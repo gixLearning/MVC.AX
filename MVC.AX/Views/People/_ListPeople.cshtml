@@ -18,8 +18,8 @@
                     <span> | </span>
                     @Ajax.ActionLink("Delete", "Delete", new { id = Model.Name },
                        new AjaxOptions {
-                           UpdateTargetId = "people-list",
-                           InsertionMode = InsertionMode.Replace,
+                           UpdateTargetId = "people-container",
+                           InsertionMode = InsertionMode.ReplaceWith,
                            HttpMethod = "GET"
                        })
 
